@@ -44,9 +44,9 @@ void Cell::CalculateNewState()
 
 	// If all cells below cannot fall, then this cell cannot fall as well.
 	// This saves us calculation for this cell.
-	if (belowCell && belowCell->canFall ||
-		leftCell && leftCell->canFall ||
-		rightCell && rightCell->canFall)
+	if ((belowCell && belowCell->canFall) ||
+		(leftCell && leftCell->canFall) ||
+		(rightCell && rightCell->canFall))
 	{
 		return;
 	}
