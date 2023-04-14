@@ -29,6 +29,7 @@ protected:
 	virtual void setUpdatedCellState(const CellStateEnum newCellState);
 
 private:
+	bool canFall = true; // If a cell can fall down anymore.
 	Vector2 position;
 	CellStateEnum updatedCellState;
 	CellStateEnum cellState;

@@ -12,7 +12,7 @@ Cell::Cell(Vector2 position, CellStateEnum newCellState) : position(position), c
 
 void Cell::CalculateNewState()
 {
-	if (getCellState() == CellStateEnum::Dead) return;
+	if (!canFall || getCellState() == CellStateEnum::Dead) return;
 
 	if (belowCell && belowCell->getCellState() == CellStateEnum::Dead)
 	{
@@ -41,6 +41,17 @@ void Cell::CalculateNewState()
 			return;
 		}
 	}
+
+	// If all cells below cannot fall, then this cell cannot fall as well.
+	// This saves us calculation for this cell.
+	if (belowCell && belowCell->canFall ||
+		leftCell && leftCell->canFall ||
+		rightCell && rightCell->canFall)
+	{
+		return;
+	}
+
+	canFall = false;
 }
 
 void Cell::UpdateToNewState()
