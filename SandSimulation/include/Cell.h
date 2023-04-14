@@ -22,11 +22,10 @@ public:
 
 	virtual Vector2 getPosition() const;
 
+	void setCellFall(const bool value);
 	virtual void setCellState(const CellStateEnum newState);
-	virtual CellStateEnum getCellState() const;
-
-protected:
 	virtual void setUpdatedCellState(const CellStateEnum newCellState);
+	virtual CellStateEnum getCellState() const;
 
 private:
 	bool canFall = true; // If a cell can fall down anymore.

@@ -74,6 +74,8 @@ Vector2 Cell::getPosition() const { return position; }
 
 void Cell::setUpdatedCellState(const CellStateEnum newCellState) { updatedCellState = newCellState; }
 
+void Cell::setCellFall(const bool value) { canFall = value; }
+
 void Cell::setCellState(const CellStateEnum newState)
 {
 	cellState = newState;

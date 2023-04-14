@@ -25,13 +25,19 @@ SimulationManager::SimulationManager()
 	cellBackground.setFillColor(BG_COLOR);
 }
 
-void SimulationManager::ToggleCellState(const Vector2 cellPos)
+void SimulationManager::ToggleCellState(const Vector2 cellPos, const bool canFall)
 {
 	if (cellMap.count(cellPos))
 	{
 		if (cellMap[cellPos]->getCellState() == CellStateEnum::Dead)
 		{
 			cellMap[cellPos]->setCellState(CellStateEnum::Alive);
+
+			if (!canFall)
+			{
+				cellMap[cellPos]->setCellFall(canFall);
+				cellMap[cellPos]->setUpdatedCellState(CellStateEnum::Alive);
+			}
 		}
 	}
 }

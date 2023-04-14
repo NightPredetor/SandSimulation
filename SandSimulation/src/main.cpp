@@ -58,7 +58,8 @@ int main()
 		}
 
 		// Turn on cells by clicking.
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) ||
+			sf::Mouse::isButtonPressed(sf::Mouse::Right))
 		{
 			if (event.mouseButton.x < simulationManager.getTotalWidth())
 			{
@@ -68,7 +69,10 @@ int main()
 				int yPos = mousePos.y / simulationManager.getCellSize();
 				Vector2 cellPos(xPos, yPos);
 
-				simulationManager.ToggleCellState(cellPos);
+				// Left click generates sand cells,
+				// Right click generates wall cells.
+				bool isLeftClick = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+				simulationManager.ToggleCellState(cellPos, isLeftClick);
 			}
 		}
 
