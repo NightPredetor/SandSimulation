@@ -61,18 +61,25 @@ int main()
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) ||
 			sf::Mouse::isButtonPressed(sf::Mouse::Right))
 		{
+			const int BRUSH_SIZE = 1;
 			if (event.mouseButton.x < simulationManager.getTotalWidth())
 			{
-				const auto mousePos = sf::Mouse::getPosition(window);
+				for (int x = -BRUSH_SIZE; x <= BRUSH_SIZE; x++)
+				{
+					for (int y = -BRUSH_SIZE; y <= BRUSH_SIZE; y++)
+					{
+						const auto mousePos = sf::Mouse::getPosition(window);
 
-				int xPos = mousePos.x / simulationManager.getCellSize();
-				int yPos = mousePos.y / simulationManager.getCellSize();
-				Vector2 cellPos(xPos, yPos);
+						int xPos = (mousePos.x + x * simulationManager.getCellSize()) / simulationManager.getCellSize();
+						int yPos = (mousePos.y + y * simulationManager.getCellSize()) / simulationManager.getCellSize();
+						Vector2 cellPos(xPos, yPos);
 
-				// Left click generates sand cells,
-				// Right click generates wall cells.
-				bool isLeftClick = sf::Mouse::isButtonPressed(sf::Mouse::Left);
-				simulationManager.ToggleCellState(cellPos, isLeftClick);
+						// Left click generates sand cells,
+						// Right click generates wall cells.
+						bool isLeftClick = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+						simulationManager.ToggleCellState(cellPos, isLeftClick);
+					}
+				}
 			}
 		}
 

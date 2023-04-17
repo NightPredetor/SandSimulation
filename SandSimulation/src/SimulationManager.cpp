@@ -32,11 +32,11 @@ void SimulationManager::ToggleCellState(const Vector2 cellPos, const bool canFal
 		if (cellMap[cellPos]->getCellState() == CellStateEnum::Dead)
 		{
 			cellMap[cellPos]->setCellState(CellStateEnum::Alive);
+			cellMap[cellPos]->setUpdatedCellState(CellStateEnum::Alive);
 
 			if (!canFall)
 			{
 				cellMap[cellPos]->setCellFall(canFall);
-				cellMap[cellPos]->setUpdatedCellState(CellStateEnum::Alive);
 			}
 		}
 	}
