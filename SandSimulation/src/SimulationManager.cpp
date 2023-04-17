@@ -113,52 +113,35 @@ void SimulationManager::SetupVertexBuffer()
 	const int BORDER_SIZE = roundf(CELL_SIZE * 0.1f);
 
 	// Setup the vertex buffer for drawing all the cells.
-	vertexArray = sf::VertexArray(sf::Quads, cellMap.size() * 8);
+	vertexArray = sf::VertexArray(sf::Quads, cellMap.size() * 4);
 
 	int i = 0;
 	sf::Vector2f point;
 	for (auto it = cellMap.begin(); it != cellMap.end(); ++it)
 	{
-		// ------------ Draw Cell's Border ------------
-		// Top left point.
-		point = sf::Vector2f(it->first.X * CELL_SIZE, it->first.Y * CELL_SIZE);
+		// ------------ Draw Cell ------------
+		point = sf::Vector2f(it->first.X * CELL_SIZE + BORDER_SIZE, it->first.Y * CELL_SIZE + BORDER_SIZE);
 		vertexArray[i].position = point;
 
 		// Top right point.
-		point = sf::Vector2f(it->first.X * CELL_SIZE + CELL_SIZE, it->first.Y * CELL_SIZE);
+		point = sf::Vector2f(it->first.X * CELL_SIZE + CELL_SIZE - BORDER_SIZE, it->first.Y * CELL_SIZE + BORDER_SIZE);
 		vertexArray[i + 1].position = point;
 
 		// Bottom right point.
-		point = sf::Vector2f(it->first.X * CELL_SIZE + CELL_SIZE, it->first.Y * CELL_SIZE + CELL_SIZE);
+		point = sf::Vector2f(it->first.X * CELL_SIZE + CELL_SIZE - BORDER_SIZE, it->first.Y * CELL_SIZE + CELL_SIZE - BORDER_SIZE);
 		vertexArray[i + 2].position = point;
 
 		// Bottom left point.
-		point = sf::Vector2f(it->first.X * CELL_SIZE, it->first.Y * CELL_SIZE + CELL_SIZE);
+		point = sf::Vector2f(it->first.X * CELL_SIZE + BORDER_SIZE, it->first.Y * CELL_SIZE + CELL_SIZE - BORDER_SIZE);
 		vertexArray[i + 3].position = point;
 
-		// ------------ Draw Cell ------------
-		point = sf::Vector2f(it->first.X * CELL_SIZE + BORDER_SIZE, it->first.Y * CELL_SIZE + BORDER_SIZE);
-		vertexArray[i + 4].position = point;
-
-		// Top right point.
-		point = sf::Vector2f(it->first.X * CELL_SIZE + CELL_SIZE - BORDER_SIZE, it->first.Y * CELL_SIZE + BORDER_SIZE);
-		vertexArray[i + 5].position = point;
-
-		// Bottom right point.
-		point = sf::Vector2f(it->first.X * CELL_SIZE + CELL_SIZE - BORDER_SIZE, it->first.Y * CELL_SIZE + CELL_SIZE - BORDER_SIZE);
-		vertexArray[i + 6].position = point;
-
-		// Bottom left point.
-		point = sf::Vector2f(it->first.X * CELL_SIZE + BORDER_SIZE, it->first.Y * CELL_SIZE + CELL_SIZE - BORDER_SIZE);
-		vertexArray[i + 7].position = point;
-
 		// Color the first 4 cells black, and the remaining 4 cells white.
-		for (int j = i; j < i + 8; j++)
+		for (int j = i; j < i + 4; j++)
 		{
-			vertexArray[j].color = j < i + 4 ? BORDER_COLOR : CELL_COLOR;
+			vertexArray[j].color = CELL_COLOR;
 		}
 
-		i += 8;
+		i += 4;
 	}
 }
 
@@ -172,13 +155,13 @@ sf::VertexArray SimulationManager::GetCellsForDraw()
 	{
 		if (data.second->getCellState() == CellStateEnum::Alive)
 		{
-			for (int i = 0; i < 8; i++)
+			for (int i = 0; i < 4; i++)
 			{
 				aliveVertexArray.append(vertexArray[vertexPoint + i]);
 			}
 		}
 
-		vertexPoint += 8;
+		vertexPoint += 4;
 	}
 
 	return aliveVertexArray;
