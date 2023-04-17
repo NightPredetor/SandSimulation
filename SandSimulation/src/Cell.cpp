@@ -22,13 +22,13 @@ void Cell::CalculateNewState()
 	}
 
 	// Generate random number between 0 and 1.
-	int rng = distrib(gen);
+	bool checkLeft = distrib(gen);
 
 	// Toggle based on RNG.
 	// If either one of them is null then pick the other.
 	for (int i = 0; i < 2; i++)
 	{
-		if (rng == 0 && leftCell && leftCell->getCellState() == CellStateEnum::Dead)
+		if (checkLeft && leftCell && leftCell->getCellState() == CellStateEnum::Dead)
 		{
 			setUpdatedCellState(CellStateEnum::Dead);
 			leftCell->setUpdatedCellState(CellStateEnum::Alive);
@@ -40,6 +40,9 @@ void Cell::CalculateNewState()
 			rightCell->setUpdatedCellState(CellStateEnum::Alive);
 			return;
 		}
+
+		// Update rng so both cells can be checked.
+		checkLeft = !checkLeft;
 	}
 
 	// If all cells below cannot fall, then this cell cannot fall as well.
