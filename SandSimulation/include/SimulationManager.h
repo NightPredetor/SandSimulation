@@ -11,7 +11,7 @@ public:
 	SimulationManager();
 
 	sf::VertexArray GetCellsForDraw();
-	void ToggleCellState(const class Vector2 cellPos, const bool canFall);
+	void ToggleCellState(const class Vector2 cellPos);
 	void TogglePause();
 	void ToggleClearBoard();
 	void PerformStep();

@@ -18,14 +18,12 @@ public:
 	virtual void CalculateNewState();
 	virtual void UpdateToNewState();
 
-	virtual void SetupNeighbours(CellManager* cellManager);
+	void SetupNeighbours(CellManager* cellManager);
 
-	virtual Vector2 getPosition() const;
-
-	void setCellFall(const bool value);
-	virtual void setCellState(const CellStateEnum newState);
-	virtual void setUpdatedCellState(const CellStateEnum newCellState);
-	virtual CellStateEnum getCellState() const;
+	Vector2 getPosition() const;
+	void setCellState(const CellStateEnum newState);
+	void setUpdatedCellState(const CellStateEnum newCellState);
+	CellStateEnum getCellState() const;
 
 private:
 	bool canFall = true; // If a cell can fall down anymore.
