@@ -5,6 +5,7 @@
 #include "enums/CellStateEnum.h"
 
 #include <random>
+#include <SFML/Graphics/Shader.hpp>
 
 class CellManager;
 
@@ -21,9 +22,14 @@ public:
 	void SetupNeighbours(CellManager* cellManager);
 
 	Vector2 getPosition() const;
+	sf::Color getColor() const;
+	void setCanFall(const bool value);
 	void setCellState(const CellStateEnum newState);
 	void setUpdatedCellState(const CellStateEnum newCellState);
 	CellStateEnum getCellState() const;
+
+protected:
+	void setColor(sf::Color newColor);
 
 private:
 	bool canFall = true; // If a cell can fall down anymore.
@@ -38,4 +44,6 @@ private:
 	// RNG setup.
 	std::mt19937 gen;
 	std::uniform_int_distribution<> distrib = std::uniform_int_distribution<>(0, 1);
+
+	sf::Color color;
 };

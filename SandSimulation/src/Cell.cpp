@@ -4,6 +4,7 @@
 Cell::Cell(Vector2 position, CellStateEnum newCellState) : position(position), cellState(newCellState)
 {
 	updatedCellState = CellStateEnum::Dead;
+	setColor(sf::Color::White);
 
 	// Setup RNG.
 	std::random_device rd;
@@ -75,6 +76,10 @@ void Cell::SetupNeighbours(CellManager* cellManager)
 
 Vector2 Cell::getPosition() const { return position; }
 
+sf::Color Cell::getColor() const { return color; }
+
+void Cell::setCanFall(const bool value) { canFall = value; }
+
 void Cell::setUpdatedCellState(const CellStateEnum newCellState) { updatedCellState = newCellState; }
 
 void Cell::setCellState(const CellStateEnum newState)
@@ -83,3 +88,5 @@ void Cell::setCellState(const CellStateEnum newState)
 }
 
 CellStateEnum Cell::getCellState() const { return cellState; }
+
+void Cell::setColor(sf::Color newColor) { color = newColor; }

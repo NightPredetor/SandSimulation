@@ -1,4 +1,5 @@
 #include "SimulationManager.h"
+#include "Stone.h"
 #include "Internal/Vector2.h"
 
 #include <iostream>
@@ -152,6 +153,7 @@ sf::VertexArray SimulationManager::GetCellsForDraw()
 		{
 			for (int i = 0; i < 4; i++)
 			{
+				vertexArray[vertexPoint + i].color = data.second->getColor();
 				aliveVertexArray.append(vertexArray[vertexPoint + i]);
 			}
 		}
