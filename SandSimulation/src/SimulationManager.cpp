@@ -101,10 +101,6 @@ bool SimulationManager::getClearBoard() const { return clearBoard; }
 
 void SimulationManager::SetupVertexBuffer()
 {
-	// Create colors.
-	const sf::Color BORDER_COLOR(20, 20, 20);
-	const sf::Color CELL_COLOR(230, 230, 230);
-
 	// Calculate border size.
 	const int BORDER_SIZE = roundf(CELL_SIZE * 0.1f);
 
@@ -113,29 +109,24 @@ void SimulationManager::SetupVertexBuffer()
 
 	int i = 0;
 	sf::Vector2f point;
-	for (auto it = cellMap.begin(); it != cellMap.end(); ++it)
+	std::vector<Vector2> gridList = Grid::CreateGrid(WIDTH, LENGTH);
+	for (const auto& vector : gridList)
 	{
 		// ------------ Draw Cell ------------
-		point = sf::Vector2f(it->first.X * CELL_SIZE + BORDER_SIZE, it->first.Y * CELL_SIZE + BORDER_SIZE);
+		point = sf::Vector2f(vector.X * CELL_SIZE + BORDER_SIZE, vector.Y * CELL_SIZE + BORDER_SIZE);
 		vertexArray[i].position = point;
 
 		// Top right point.
-		point = sf::Vector2f(it->first.X * CELL_SIZE + CELL_SIZE - BORDER_SIZE, it->first.Y * CELL_SIZE + BORDER_SIZE);
+		point = sf::Vector2f(vector.X * CELL_SIZE + CELL_SIZE - BORDER_SIZE, vector.Y * CELL_SIZE + BORDER_SIZE);
 		vertexArray[i + 1].position = point;
 
 		// Bottom right point.
-		point = sf::Vector2f(it->first.X * CELL_SIZE + CELL_SIZE - BORDER_SIZE, it->first.Y * CELL_SIZE + CELL_SIZE - BORDER_SIZE);
+		point = sf::Vector2f(vector.X * CELL_SIZE + CELL_SIZE - BORDER_SIZE, vector.Y * CELL_SIZE + CELL_SIZE - BORDER_SIZE);
 		vertexArray[i + 2].position = point;
 
 		// Bottom left point.
-		point = sf::Vector2f(it->first.X * CELL_SIZE + BORDER_SIZE, it->first.Y * CELL_SIZE + CELL_SIZE - BORDER_SIZE);
+		point = sf::Vector2f(vector.X * CELL_SIZE + BORDER_SIZE, vector.Y * CELL_SIZE + CELL_SIZE - BORDER_SIZE);
 		vertexArray[i + 3].position = point;
-
-		// Color the first 4 cells black, and the remaining 4 cells white.
-		for (int j = i; j < i + 4; j++)
-		{
-			vertexArray[j].color = CELL_COLOR;
-		}
 
 		i += 4;
 	}
