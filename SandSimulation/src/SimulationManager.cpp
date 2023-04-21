@@ -1,6 +1,5 @@
 #include "SimulationManager.h"
 #include "Stone.h"
-#include "Internal/Vector2.h"
 
 #include <iostream>
 #include <math.h>
@@ -12,13 +11,6 @@ SimulationManager::SimulationManager()
 	totalWidth = WIDTH * CELL_SIZE;
 	totalLength = LENGTH * CELL_SIZE;
 
-	// Get cell dictionary.
-	cellMap = cellManager.getCellDict();
-	if (cellMap.empty())
-	{
-		std::cout << "No cells found!";
-	}
-
 	// Setup vertex buffer.
 	SetupVertexBuffer();
 
@@ -26,16 +18,9 @@ SimulationManager::SimulationManager()
 	cellBackground.setFillColor(BG_COLOR);
 }
 
-void SimulationManager::ToggleCellState(const Vector2 cellPos)
+void SimulationManager::DrawCell(const int x, const int y)
 {
-	if (cellMap.count(cellPos))
-	{
-		if (cellMap[cellPos]->getCellState() == CellStateEnum::Dead)
-		{
-			cellMap[cellPos]->setCellState(CellStateEnum::Alive);
-			cellMap[cellPos]->setUpdatedCellState(CellStateEnum::Alive);
-		}
-	}
+	cellManager.DrawCell(x, y);
 }
 
 void SimulationManager::TogglePause()
@@ -68,8 +53,7 @@ void SimulationManager::OnRestart()
 	step = clearBoard;
 	pauseSimulation = clearBoard;
 
-	cellManager = CellManager(WIDTH, LENGTH, clearBoard ? CellStateEnum::Dead : CellStateEnum::NONE);
-	cellMap = cellManager.getCellDict();
+	cellManager = CellManager(WIDTH, LENGTH);
 }
 
 void SimulationManager::UpdateCells()
@@ -105,30 +89,32 @@ void SimulationManager::SetupVertexBuffer()
 	const int BORDER_SIZE = roundf(CELL_SIZE * 0.1f);
 
 	// Setup the vertex buffer for drawing all the cells.
-	vertexArray = sf::VertexArray(sf::Quads, cellMap.size() * 4);
+	vertexArray = sf::VertexArray(sf::Quads, WIDTH * LENGTH * 4);
 
 	int i = 0;
 	sf::Vector2f point;
-	std::vector<Vector2> gridList = Grid::CreateGrid(WIDTH, LENGTH);
-	for (const auto& vector : gridList)
+	for (int y = 0; y < LENGTH; y++)
 	{
-		// ------------ Draw Cell ------------
-		point = sf::Vector2f(vector.X * CELL_SIZE + BORDER_SIZE, vector.Y * CELL_SIZE + BORDER_SIZE);
-		vertexArray[i].position = point;
+		for (int x = 0; x < WIDTH; x++)
+		{
+			// ------------ Draw Cell ------------
+			point = sf::Vector2f(x * CELL_SIZE + BORDER_SIZE, y * CELL_SIZE + BORDER_SIZE);
+			vertexArray[i].position = point;
 
-		// Top right point.
-		point = sf::Vector2f(vector.X * CELL_SIZE + CELL_SIZE - BORDER_SIZE, vector.Y * CELL_SIZE + BORDER_SIZE);
-		vertexArray[i + 1].position = point;
+			// Top right point.
+			point = sf::Vector2f(x * CELL_SIZE + CELL_SIZE - BORDER_SIZE, y * CELL_SIZE + BORDER_SIZE);
+			vertexArray[i + 1].position = point;
 
-		// Bottom right point.
-		point = sf::Vector2f(vector.X * CELL_SIZE + CELL_SIZE - BORDER_SIZE, vector.Y * CELL_SIZE + CELL_SIZE - BORDER_SIZE);
-		vertexArray[i + 2].position = point;
+			// Bottom right point.
+			point = sf::Vector2f(x * CELL_SIZE + CELL_SIZE - BORDER_SIZE, y * CELL_SIZE + CELL_SIZE - BORDER_SIZE);
+			vertexArray[i + 2].position = point;
 
-		// Bottom left point.
-		point = sf::Vector2f(vector.X * CELL_SIZE + BORDER_SIZE, vector.Y * CELL_SIZE + CELL_SIZE - BORDER_SIZE);
-		vertexArray[i + 3].position = point;
+			// Bottom left point.
+			point = sf::Vector2f(x * CELL_SIZE + BORDER_SIZE, y * CELL_SIZE + CELL_SIZE - BORDER_SIZE);
+			vertexArray[i + 3].position = point;
 
-		i += 4;
+			i += 4;
+		}
 	}
 }
 
@@ -138,18 +124,21 @@ sf::VertexArray SimulationManager::GetCellsForDraw()
 	sf::VertexArray aliveVertexArray(sf::Quads);
 
 	int vertexPoint = 0;
-	for (const auto& data : cellMap)
+	for (const auto& xList : cellManager.getCellList())
 	{
-		if (data.second->getCellState() == CellStateEnum::Alive)
+		for (const auto& cell : xList)
 		{
-			for (int i = 0; i < 4; i++)
+			if (cell)
 			{
-				vertexArray[vertexPoint + i].color = data.second->getColor();
-				aliveVertexArray.append(vertexArray[vertexPoint + i]);
+				for (int i = 0; i < 4; i++)
+				{
+					vertexArray[vertexPoint + i].color = cell->getColor();
+					aliveVertexArray.append(vertexArray[vertexPoint + i]);
+				}
 			}
-		}
 
-		vertexPoint += 4;
+			vertexPoint += 4;
+		}
 	}
 
 	return aliveVertexArray;

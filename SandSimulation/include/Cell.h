@@ -1,8 +1,6 @@
 #pragma once
 
 #include <vector>
-#include "Internal/Vector2.h"
-#include "enums/CellStateEnum.h"
 
 #include <random>
 #include <SFML/Graphics/Shader.hpp>
@@ -13,37 +11,30 @@ class CellManager;
 class Cell
 {
 public:
-	explicit Cell(Vector2 position, CellStateEnum newCellState);
+	explicit Cell(const int x, const int y, const CellManager* cellManager);
 	virtual ~Cell() = default;
 
-	virtual void CalculateNewState();
-	virtual void UpdateToNewState();
+	virtual void CalculateNewPosition(int& x, int& y);
 
-	void SetupNeighbours(CellManager* cellManager);
-
-	Vector2 getPosition() const;
+	// Getters.
+	int getXPos() const;
+	int getYPos() const;
 	sf::Color getColor() const;
+
+	// Setters.
+	void setXPos(const int x);
+	void setYPos(const int y);
 	void setCanFall(const bool value);
-	void setCellState(const CellStateEnum newState);
-	void setUpdatedCellState(const CellStateEnum newCellState);
-	CellStateEnum getCellState() const;
 
 protected:
 	void setColor(sf::Color newColor);
+	bool IsCellEmpty(const int x, const int y) const;
 
 private:
+	int xPos;
+	int yPos;
 	bool canFall = true; // If a cell can fall down anymore.
-	Vector2 position;
-	CellStateEnum updatedCellState;
-	CellStateEnum cellState;
-
-	Cell* belowCell = nullptr;
-	Cell* leftCell = nullptr;
-	Cell* rightCell = nullptr;
-
-	// RNG setup.
-	std::mt19937 gen;
-	std::uniform_int_distribution<> distrib = std::uniform_int_distribution<>(0, 1);
-
 	sf::Color color;
+
+	const class CellManager* cellManager;
 };

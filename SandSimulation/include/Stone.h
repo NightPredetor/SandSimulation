@@ -5,9 +5,8 @@
 class Stone : public Cell
 {
 public:
-	Stone(Vector2 position, CellStateEnum newCellState);
+	explicit Stone(const int x, const int y, const CellManager* cellManager);
 
-	void CalculateNewState() override;
-	void UpdateToNewState() override;
+	void CalculateNewPosition(int& x, int& y) override;
 };
 

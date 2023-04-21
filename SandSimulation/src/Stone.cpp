@@ -1,20 +1,14 @@
 #include "Stone.h"
 
-Stone::Stone(Vector2 position, CellStateEnum newCellState) : Cell(position, newCellState)
+Stone::Stone(const int x, const int y, const CellManager* cellManager) : Cell(x, y, cellManager)
 {
 	setColor(sf::Color::Black);
-
 	setCanFall(false);
-	setCellState(CellStateEnum::Alive);
-	setUpdatedCellState(CellStateEnum::Alive);
 }
 
-void Stone::CalculateNewState()
+void Stone::CalculateNewPosition(int& x, int& y)
 {
-	return;
-}
+	Cell::CalculateNewPosition(x, y);
 
-void Stone::UpdateToNewState()
-{
 	return;
 }

@@ -88,9 +88,8 @@ int main()
 
 						int xPos = (mousePos.x + x * simulationManager.getCellSize()) / simulationManager.getCellSize();
 						int yPos = (mousePos.y + y * simulationManager.getCellSize()) / simulationManager.getCellSize();
-						Vector2 cellPos(xPos, yPos);
 
-						simulationManager.ToggleCellState(cellPos);
+						simulationManager.DrawCell(xPos, yPos);
 					}
 				}
 			}

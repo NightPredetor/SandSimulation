@@ -11,7 +11,7 @@ public:
 	SimulationManager();
 
 	sf::VertexArray GetCellsForDraw();
-	void ToggleCellState(const class Vector2 cellPos);
+	void DrawCell(const int x, const int y);
 	void TogglePause();
 	void ToggleClearBoard();
 	void PerformStep();
@@ -50,8 +50,7 @@ private:
 	bool clearBoard = false;
 	bool pauseSimulation = false;
 
-	CellManager cellManager = CellManager(WIDTH, LENGTH, CellStateEnum::NONE);
-	std::map<Vector2, class Cell*> cellMap;
+	CellManager cellManager = CellManager(WIDTH, LENGTH);
 
 	sf::VertexArray vertexArray;
 	sf::RectangleShape cellBackground = sf::RectangleShape(sf::Vector2f(WIDTH* CELL_SIZE, LENGTH* CELL_SIZE));

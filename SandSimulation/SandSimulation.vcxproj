@@ -145,12 +145,11 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Sand.cpp" />
     <ClCompile Include="src\ButtonManager.cpp" />
     <ClCompile Include="src\Cell.cpp" />
     <ClCompile Include="src\CellManager.cpp" />
     <ClCompile Include="src\Internal\FPS.cpp" />
-    <ClCompile Include="src\Internal\Grid.cpp" />
-    <ClCompile Include="src\Internal\Vector2.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\SimulationManager.cpp" />
     <ClCompile Include="src\Stone.cpp" />
@@ -159,12 +158,10 @@
     <ClInclude Include="include\ButtonManager.h" />
     <ClInclude Include="include\Cell.h" />
     <ClInclude Include="include\CellManager.h" />
-    <ClInclude Include="include\enums\CellStateEnum.h" />
     <ClInclude Include="include\Internal\FPS.h" />
-    <ClInclude Include="include\Internal\Grid.h" />
-    <ClInclude Include="include\Internal\Vector2.h" />
     <ClInclude Include="include\SimulationManager.h" />
     <ClInclude Include="include\Stone.h" />
+    <ClInclude Include="include\Sand.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Font\arial.ttf" />
