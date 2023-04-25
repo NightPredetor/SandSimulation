@@ -8,12 +8,23 @@ Sand::Sand(const int x, const int y, const CellManager* cellManager) : Cell(x, y
 
 void Sand::CalculateNewPosition(int& x, int& y)
 {
+	// Generate RNG. To randomize next position.
+	int multiplierRng = GetMultiplierRNG();
+
+	// Cache current X position.
+	int currentX = getXPos();
+
+	// Calculate Y position.
+	const int fixedYPos = getYPos() + 1;
+
 	// Calculate new position.
-	for (int i = 0; i < xArray.size(); i++)
+	for (int pos : xArray)
 	{
-		if (IsCellEmpty(getXPos() + i, getYPos() + 1))
+		int newX = currentX + (pos * multiplierRng);
+
+		if (IsCellEmpty(newX, fixedYPos))
 		{
-			SetPosition(getXPos() + i, getYPos() + 1);
+			SetPosition(newX, fixedYPos);
 			break;
 		}
 	}
