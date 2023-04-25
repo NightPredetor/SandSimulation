@@ -153,6 +153,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\SimulationManager.cpp" />
     <ClCompile Include="src\Stone.cpp" />
+    <ClCompile Include="src\Water.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\ButtonManager.h" />
@@ -162,6 +163,7 @@
     <ClInclude Include="include\SimulationManager.h" />
     <ClInclude Include="include\Stone.h" />
     <ClInclude Include="include\Sand.h" />
+    <ClInclude Include="include\Water.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Font\arial.ttf" />

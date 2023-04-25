@@ -1,6 +1,7 @@
 #include "CellManager.h"
 #include "Cell.h"
 #include "Sand.h"
+#include "Water.h"
 
 #include <time.h>
 #include <iostream>
@@ -21,23 +22,18 @@ void CellManager::UpdateCells()
 		for (int x = cellList[y].size()-1; x >= 0; x--)
 		{
 			Cell* cell = cellList[y][x];
-			if (cell == nullptr) continue;
+			cellList[y][x] = nullptr;
 
-			cell->CalculateNewPosition(xPos, yPos);
-			
-			if (IsCellPosValid(xPos, yPos) == false) continue;
+			if (cell)
+			{
+				cell->CalculateNewPosition(xPos, yPos);
 
-			cellBufferList[yPos][xPos] = cell;
-		}
-	}
-
-	cellList = std::vector<std::vector<Cell*>>(cellBufferList);
-
-	for (int y = 0; y < cellList.size(); y++)
-	{
-		for (int x = 0; x < cellList[y].size(); x++)
-		{
-			cellBufferList[y][x] = nullptr;
+				if (IsCellPosValid(xPos, yPos))
+				{
+					cellList[yPos][xPos] = cell;
+					continue;
+				}
+			}
 		}
 	}
 }
@@ -51,7 +47,7 @@ bool CellManager::IsCellEmpty(const int x, const int y) const
 {
 	if (IsCellPosValid(x, y) == false) return false;
 
-	return cellBufferList[y][x] == nullptr;
+	return cellList[y][x] == nullptr;
 }
 
 void CellManager::DrawCell(const int x, const int y)
@@ -69,20 +65,17 @@ void CellManager::CreateCells(const int width, const int height)
 	srand(time(NULL));
 	
 	cellList = std::vector<std::vector<Cell*>>(height);
-	cellBufferList = std::vector<std::vector<Cell*>>(height);
 
-	for (size_t y = 0; y < height; y++)
+	for (int y = 0; y < height; y++)
 	{
 		cellList[y] = std::vector<Cell*>(width);
-		cellBufferList[y] = std::vector<Cell*>(width);
 
-		for (size_t x = 0; x < width; x++)
+		for (int x = 0; x < width; x++)
 		{
 			// TODO: Only for testing by generating random cells. Remove later and generate null cells.
-			bool isAlive = rand() % 2;
-			isAlive = false;
+			int rng = rand() % 2;
 
-			if (isAlive)
+			if (rng == 0)
 			{
 				cellList[y][x] = new Sand(x, y, this);
 			}
@@ -90,13 +83,11 @@ void CellManager::CreateCells(const int width, const int height)
 			{
 				cellList[y][x] = nullptr;
 			}
-
-			cellBufferList[y][x] = nullptr;
 		}
 	}
 }
 
-bool CellManager::IsCellPosValid(const size_t x, const size_t y) const
+bool CellManager::IsCellPosValid(const int x, const int y) const
 {
-	return (y < cellBufferList.size()) && (x < cellBufferList[y].size());
+	return (y < cellList.size()) && (x < cellList[y].size());
 }

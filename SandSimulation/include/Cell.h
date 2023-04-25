@@ -22,11 +22,10 @@ public:
 	sf::Color getColor() const;
 
 	// Setters.
-	void setXPos(const int x);
-	void setYPos(const int y);
 	void setCanFall(const bool value);
 
 protected:
+	void SetPosition(const int x, const int y);
 	void setColor(sf::Color newColor);
 	bool IsCellEmpty(const int x, const int y) const;
 

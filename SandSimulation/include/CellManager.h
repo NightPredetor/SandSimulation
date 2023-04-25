@@ -21,8 +21,7 @@ public:
 
 private:
 	std::vector<std::vector<Cell*>> cellList;
-	std::vector<std::vector<Cell*>> cellBufferList;
 
 	void CreateCells(const int width, const int height);
-	bool IsCellPosValid(const size_t x, const size_t y) const;
+	bool IsCellPosValid(const int x, const int y) const;
 };
