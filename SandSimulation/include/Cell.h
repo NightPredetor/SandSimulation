@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-
 #include <random>
 #include <SFML/Graphics/Shader.hpp>
 
@@ -29,11 +28,17 @@ protected:
 	void setColor(sf::Color newColor);
 	bool IsCellEmpty(const int x, const int y) const;
 
+	int GetMultiplierRNG();
+
 private:
 	int xPos;
 	int yPos;
 	bool canFall = true; // If a cell can fall down anymore.
 	sf::Color color;
+
+	std::default_random_engine generator;
+	std::uniform_int_distribution<int> distribution = std::uniform_int_distribution<int>(0, 1);
+
 
 	const class CellManager* cellManager;
 };

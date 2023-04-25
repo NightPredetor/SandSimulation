@@ -36,3 +36,8 @@ bool Cell::IsCellEmpty(const int x, const int y) const
 {
 	return cellManager->IsCellEmpty(x, y);
 }
+
+int Cell::GetMultiplierRNG()
+{
+	return distribution(generator) == 0 ? 1 : -1;
+}
