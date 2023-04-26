@@ -10,10 +10,10 @@ public:
 private:
 	const std::vector<std::vector<int>> matrix =
     {
-		{0, 1},
-		{-1, 1},
-		{1, 1},
-		{1, 0},
-		{-1, 0},
+		{0, 1},		// Bottom
+		{-1, 1},	// Bottom Left
+		{1, 1},		// Bottom Right
+		{-1, 0},	// Left
+		{1, 0},		// Right
     };
 };
