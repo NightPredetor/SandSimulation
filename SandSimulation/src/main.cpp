@@ -54,6 +54,18 @@ int main()
 					simulationManager.ToggleClearBoard();
 					buttonManager.UpdateCheckboxLabel(simulationManager.getClearBoard());
 				}
+
+				auto btnList = buttonManager.getButtonList();
+				for (int i = 0; i < btnList.size(); i++)
+				{
+					auto const& cellBtn = btnList[i];
+
+					if (cellBtn.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+					{
+						simulationManager.setCurrentCellIndex(i);
+						break;
+					}
+				}
 			}
 		}
 
@@ -105,6 +117,18 @@ int main()
 		window.draw(buttonManager.getRestartLabel());
 		window.draw(buttonManager.getClearCheckboxBtn());
 		window.draw(buttonManager.getClearCheckboxLabel());
+
+		// Draw cell buttons.
+		for (const auto& btn : buttonManager.getButtonList())
+		{
+			window.draw(btn);
+		}
+
+		// Draw cell button labels.
+		for (const auto& label : buttonManager.getLabelList())
+		{
+			window.draw(label);
+		}
 
 		// FPS.
 		fpsHandler.Update();

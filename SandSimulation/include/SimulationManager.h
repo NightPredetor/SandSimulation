@@ -35,6 +35,9 @@ public:
 	bool getPauseSimulation() const;
 	bool getClearBoard() const;
 
+	// Setters.
+	void setCurrentCellIndex(const int index);
+
 private:
 	// Set const variables.
 	const int WIDTH = 200;
@@ -49,6 +52,7 @@ private:
 	bool step = false;
 	bool clearBoard = false;
 	bool pauseSimulation = false;
+	int currentCellIndex = 0;
 
 	CellManager cellManager = CellManager(WIDTH, LENGTH);
 

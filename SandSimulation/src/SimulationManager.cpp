@@ -1,4 +1,6 @@
 #include "SimulationManager.h"
+#include "Water.h"
+#include "Sand.h"
 #include "Stone.h"
 
 #include <iostream>
@@ -20,7 +22,24 @@ SimulationManager::SimulationManager()
 
 void SimulationManager::DrawCell(const int x, const int y)
 {
-	cellManager.DrawCell(x, y);
+	if (currentCellIndex == 0)
+	{
+		cellManager.DrawCell<Water>(x, y);
+	}
+	switch (currentCellIndex)
+	{
+		case 1:
+			cellManager.DrawCell<Water>(x, y);
+			break;
+
+		case 2:
+			cellManager.DrawCell<Stone>(x, y);
+			break;
+
+		default:
+			cellManager.DrawCell<Sand>(x, y);
+			break;
+	}
 }
 
 void SimulationManager::TogglePause()
@@ -80,6 +99,8 @@ sf::RectangleShape SimulationManager::getCellBg() const { return cellBackground;
 bool SimulationManager::getPauseSimulation() const { return pauseSimulation; }
 
 bool SimulationManager::getClearBoard() const { return clearBoard; }
+
+void SimulationManager::setCurrentCellIndex(const int index) { currentCellIndex = index; }
 
 // ----- Private -----
 

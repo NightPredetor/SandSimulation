@@ -14,6 +14,8 @@ public:
 
 	void UpdateCells();
 	bool IsCellEmpty(const int x, const int y) const;
+
+	template<class T>
 	void DrawCell(const int x, const int y);
 
 	// Getters.
@@ -25,3 +27,13 @@ private:
 	void CreateCells(const int width, const int height);
 	bool IsCellPosValid(const int x, const int y) const;
 };
+
+
+template <typename T>
+void CellManager::DrawCell(const int x, const int y)
+{
+	if (IsCellPosValid(x, y) == false) return;
+
+	// TODO: Generate a cell type based on input/UI.
+	cellList[y][x] = new T(x, y, this);
+}

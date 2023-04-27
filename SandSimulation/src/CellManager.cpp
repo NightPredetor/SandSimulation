@@ -1,7 +1,5 @@
 #include "CellManager.h"
 #include "Cell.h"
-#include "Sand.h"
-#include "Water.h"
 
 #include <time.h>
 #include <iostream>
@@ -22,7 +20,6 @@ void CellManager::UpdateCells()
 		for (int x = cellList[y].size()-1; x >= 0; x--)
 		{
 			Cell* cell = cellList[y][x];
-			cellList[y][x] = nullptr;
 
 			if (cell)
 			{
@@ -30,7 +27,9 @@ void CellManager::UpdateCells()
 
 				if (IsCellPosValid(xPos, yPos))
 				{
+					cellList[y][x] = nullptr;
 					cellList[yPos][xPos] = cell;
+
 					continue;
 				}
 			}
@@ -48,14 +47,6 @@ bool CellManager::IsCellEmpty(const int x, const int y) const
 	if (IsCellPosValid(x, y) == false) return false;
 
 	return cellList[y][x] == nullptr;
-}
-
-void CellManager::DrawCell(const int x, const int y)
-{
-	if (IsCellPosValid(x, y) == false) return;
-
-	// TODO: Generate a cell type based on input/UI.
-	cellList[y][x] = new Sand(x, y, this);
 }
 
 // Private
@@ -77,7 +68,7 @@ void CellManager::CreateCells(const int width, const int height)
 
 			if (rng == 0)
 			{
-				cellList[y][x] = new Sand(x, y, this);
+				//cellList[y][x] = new Stone(x, y, this);
 			}
 			else
 			{

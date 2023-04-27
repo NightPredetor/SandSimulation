@@ -1,5 +1,7 @@
 #include "ButtonManager.h"
 
+#include <array>
+
 // ----- Public -----
 
 ButtonManager::ButtonManager(const int width, const int cellSize) : width(width), cellSize(cellSize)
@@ -11,6 +13,9 @@ ButtonManager::ButtonManager(const int width, const int cellSize) : width(width)
 	SetupStepButton();
 	SetupRestartButton();
 	SetupClearButton();
+
+	SetupButtonList();
+	//SetupSandButton();
 }
 
 sf::RectangleShape ButtonManager::getPauseBtn() const { return pauseBtn; }
@@ -28,6 +33,10 @@ sf::Text ButtonManager::getRestartLabel() const { return restartLabel; }
 sf::RectangleShape ButtonManager::getClearCheckboxBtn() const { return clearCheckboxBtn; }
 
 sf::Text ButtonManager::getClearCheckboxLabel() const { return clearCheckboxLabel; }
+
+std::vector<sf::RectangleShape> ButtonManager::getButtonList() const { return btnList; }
+
+std::vector<sf::Text> ButtonManager::getLabelList() const { return labelList; }
 
 void ButtonManager::UpdatePauseBtn(const bool isSimulationPaused)
 {
@@ -109,4 +118,28 @@ void ButtonManager::SetupClearButton()
 	clearCheckboxLabel.setCharacterSize(15);
 	clearCheckboxLabel.setFillColor(sf::Color::Black);
 	clearCheckboxLabel.setPosition(width * cellSize + 140, 130);
+}
+
+void ButtonManager::SetupButtonList()
+{
+	const float OFFSET = 75;
+	const std::array<std::string, 3> labelNameArray = { "Sand", "Water", "Stone" };
+
+	for (int i = 0; i < 3; i++)
+	{
+		// Set button.
+		auto btn = sf::RectangleShape(sf::Vector2f(100, 50));
+		btn.setPosition(width * cellSize + 50, 225 + OFFSET * i);
+		btn.setFillColor(sf::Color::White);
+
+		btnList.push_back(btn);
+
+		// Set label.
+		auto label = sf::Text(labelNameArray[i], font);
+		label.setCharacterSize(20);
+		label.setFillColor(sf::Color::Black);
+		label.setPosition(width * cellSize + (60 + 15), 225 + 10 + OFFSET * i);
+
+		labelList.push_back(label);
+	}
 }

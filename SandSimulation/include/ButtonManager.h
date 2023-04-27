@@ -21,6 +21,9 @@ public:
 	sf::RectangleShape getClearCheckboxBtn() const;
 	sf::Text getClearCheckboxLabel() const;
 
+	std::vector<sf::RectangleShape> getButtonList() const;
+	std::vector<sf::Text> getLabelList() const;
+
 private:
 	sf::Font font;
 
@@ -39,8 +42,14 @@ private:
 	sf::RectangleShape clearCheckboxBtn;
 	sf::Text clearCheckboxLabel;
 
+	// Cell Buttons.
+	std::vector<sf::RectangleShape> btnList;
+	std::vector<sf::Text> labelList;
+
 	void SetupPauseButton();
 	void SetupStepButton();
 	void SetupRestartButton();
 	void SetupClearButton();
+
+	void SetupButtonList();
 };
