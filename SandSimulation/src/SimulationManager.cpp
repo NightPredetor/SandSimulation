@@ -29,15 +29,19 @@ void SimulationManager::DrawCell(const int x, const int y)
 	switch (currentCellIndex)
 	{
 		case 1:
-			cellManager.DrawCell<Water>(x, y);
+			cellManager.DrawCell<Sand>(x, y);
 			break;
 
 		case 2:
+			cellManager.DrawCell<Water>(x, y);
+			break;
+
+		case 3:
 			cellManager.DrawCell<Stone>(x, y);
 			break;
 
 		default:
-			cellManager.DrawCell<Sand>(x, y);
+			cellManager.DrawEmptyCell(x, y);
 			break;
 	}
 }

@@ -17,6 +17,7 @@ public:
 
 	template<class T>
 	void DrawCell(const int x, const int y);
+	void DrawEmptyCell(const int x, const int y);
 
 	// Getters.
 	std::vector<std::vector<Cell*>> getCellList() const;
@@ -34,6 +35,5 @@ void CellManager::DrawCell(const int x, const int y)
 {
 	if (IsCellPosValid(x, y) == false) return;
 
-	// TODO: Generate a cell type based on input/UI.
 	cellList[y][x] = new T(x, y, this);
 }

@@ -37,6 +37,13 @@ void CellManager::UpdateCells()
 	}
 }
 
+void CellManager::DrawEmptyCell(const int x, const int y)
+{
+	if (IsCellPosValid(x, y) == false) return;
+
+	cellList[y][x] = nullptr;
+}
+
 std::vector<std::vector<Cell*>> CellManager::getCellList() const
 {
 	return cellList;

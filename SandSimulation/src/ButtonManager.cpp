@@ -123,9 +123,9 @@ void ButtonManager::SetupClearButton()
 void ButtonManager::SetupButtonList()
 {
 	const float OFFSET = 75;
-	const std::array<std::string, 3> labelNameArray = { "Sand", "Water", "Stone" };
+	const std::array<std::string, 4> labelNameArray = { "Erase", "Sand", "Water", "Stone" };
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < labelNameArray.size(); i++)
 	{
 		// Set button.
 		auto btn = sf::RectangleShape(sf::Vector2f(100, 50));

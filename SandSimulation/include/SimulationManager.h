@@ -52,7 +52,7 @@ private:
 	bool step = false;
 	bool clearBoard = false;
 	bool pauseSimulation = false;
-	int currentCellIndex = 0;
+	int currentCellIndex = 1;
 
 	CellManager cellManager = CellManager(WIDTH, LENGTH);
 
