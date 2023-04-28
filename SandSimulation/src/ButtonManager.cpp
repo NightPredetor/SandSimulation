@@ -15,7 +15,7 @@ ButtonManager::ButtonManager(const int width, const int cellSize) : width(width)
 	SetupClearButton();
 
 	SetupButtonList();
-	//SetupSandButton();
+	UpdateCellButton(1);
 }
 
 sf::RectangleShape ButtonManager::getPauseBtn() const { return pauseBtn; }
@@ -60,6 +60,17 @@ void ButtonManager::UpdateCheckboxLabel(const bool clearBoard)
 {
 	std::string result = clearBoard ? "True" : "False";
 	clearCheckboxLabel.setString("Clear:\n" + result);
+}
+
+void ButtonManager::UpdateCellButton(const int newIndex)
+{
+	if (newIndex >= 0 && newIndex < btnList.size())
+	{
+		btnList[currentCellBtnIndex].setFillColor(sf::Color::White);
+		btnList[newIndex].setFillColor(sf::Color::Green);
+
+		currentCellBtnIndex = newIndex;
+	}
 }
 
 // ----- Private -----

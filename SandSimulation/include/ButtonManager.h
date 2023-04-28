@@ -8,6 +8,7 @@ public:
 
 	void UpdatePauseBtn(const bool isSimulationPaused);
 	void UpdateCheckboxLabel(const bool clearBoard);
+	void UpdateCellButton(const int newIndex);
 
 	sf::RectangleShape getPauseBtn() const;
 	sf::Text getPauseLabel() const;
@@ -45,6 +46,9 @@ private:
 	// Cell Buttons.
 	std::vector<sf::RectangleShape> btnList;
 	std::vector<sf::Text> labelList;
+
+	int currentCellBtnIndex;
+	std::vector<sf::RectangleShape>* currentSelectedCellBtn;
 
 	void SetupPauseButton();
 	void SetupStepButton();

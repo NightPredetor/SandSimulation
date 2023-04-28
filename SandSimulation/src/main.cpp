@@ -62,6 +62,7 @@ int main()
 
 					if (cellBtn.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
 					{
+						buttonManager.UpdateCellButton(i);
 						simulationManager.setCurrentCellIndex(i);
 						break;
 					}
