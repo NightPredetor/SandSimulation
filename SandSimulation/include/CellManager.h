@@ -36,6 +36,11 @@ void CellManager::DrawCell(const int x, const int y)
 {
 	if (IsCellPosValid(x, y) == false) return;
 
+	// Remove the old cell.
+	if (cellList[y][x])
+	{
+		calculatedCellMap.erase(cellList[y][x]);
+	}
+
 	cellList[y][x] = new T(x, y, this);
-	calculatedCellMap[cellList[y][x]] = false;
 }
