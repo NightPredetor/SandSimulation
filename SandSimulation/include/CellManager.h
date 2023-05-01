@@ -1,7 +1,7 @@
 #pragma once
 
-#include <map>
 #include <vector>
+#include <unordered_map>
 
 class Cell;
 
@@ -24,7 +24,7 @@ public:
 
 private:
 	std::vector<std::vector<Cell*>> cellList;
-	std::map<Cell*, bool> calculatedCellMap; // Cells that have been calculated already.
+	std::unordered_map<Cell*, bool> calculatedCellMap; // Cells that have been calculated already.
 
 	void CreateCells(const int width, const int height);
 	bool IsCellPosValid(const int x, const int y) const;

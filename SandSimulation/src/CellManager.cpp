@@ -21,18 +21,13 @@ void CellManager::UpdateCells()
 		{
 			Cell* cell = cellList[y][x];
 
-			if (cell && calculatedCellMap[cell] == false)
+			if (cell && !calculatedCellMap[cell])
 			{
 				calculatedCellMap[cell] = true;
 				cell->CalculateNewPosition(xPos, yPos);
 
-				if (IsCellPosValid(xPos, yPos))
-				{
-					cellList[y][x] = nullptr;
-					cellList[yPos][xPos] = cell;
-
-					continue;
-				}
+				cellList[y][x] = nullptr;
+				cellList[yPos][xPos] = cell;
 			}
 		}
 	}
