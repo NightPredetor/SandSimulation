@@ -24,6 +24,7 @@ public:
 
 private:
 	std::vector<std::vector<Cell*>> cellList;
+	std::map<Cell*, bool> calculatedCellMap; // Cells that have been calculated already.
 
 	void CreateCells(const int width, const int height);
 	bool IsCellPosValid(const int x, const int y) const;
@@ -36,4 +37,5 @@ void CellManager::DrawCell(const int x, const int y)
 	if (IsCellPosValid(x, y) == false) return;
 
 	cellList[y][x] = new T(x, y, this);
+	calculatedCellMap[cellList[y][x]] = false;
 }

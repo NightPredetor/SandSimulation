@@ -21,8 +21,9 @@ void CellManager::UpdateCells()
 		{
 			Cell* cell = cellList[y][x];
 
-			if (cell)
+			if (cell && calculatedCellMap[cell] == false)
 			{
+				calculatedCellMap[cell] = true;
 				cell->CalculateNewPosition(xPos, yPos);
 
 				if (IsCellPosValid(xPos, yPos))
@@ -35,12 +36,19 @@ void CellManager::UpdateCells()
 			}
 		}
 	}
+
+	// Reset calculated cell dict.
+	for (auto& kvp : calculatedCellMap)
+	{
+		kvp.second = false;
+	}
 }
 
 void CellManager::DrawEmptyCell(const int x, const int y)
 {
 	if (IsCellPosValid(x, y) == false) return;
 
+	calculatedCellMap.erase(cellList[y][x]);
 	cellList[y][x] = nullptr;
 }
 
