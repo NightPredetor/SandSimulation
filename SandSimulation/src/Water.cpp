@@ -8,10 +8,6 @@ Water::Water(const int x, const int y, const CellManager* cellManager) : Cell(x,
 
 void Water::CalculateNewPosition(int& x, int& y)
 {
-	// TODO:
-	// CellManager needs to keep track of each cell that has been calculated in the current frame.
-	// This is done as a water cell can move to the left.
-
 	// Generate RNG. To randomize next position.
 	int multiplierRng = GetMultiplierRNG();
 
@@ -20,10 +16,10 @@ void Water::CalculateNewPosition(int& x, int& y)
 	int currentY = getYPos();
 
 	// Calculate new position.
-	for (std::vector<int> vector : matrix)
+	for (int i = 0; i < matrix.size(); i++)
 	{
-		int newX = currentX + (vector[0] * multiplierRng);
-		int newY = currentY + vector[1];
+		int newX = currentX + (matrix[i][0] * multiplierRng);
+		int newY = currentY + matrix[i][1];
 
 		if (IsCellEmpty(newX, newY))
 		{
