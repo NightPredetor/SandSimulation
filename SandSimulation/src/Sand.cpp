@@ -1,9 +1,9 @@
 #include "Sand.h"
+#include <iostream>
 
 Sand::Sand(const int x, const int y, const CellManager* cellManager) : Cell(x, y, cellManager)
 {
-	setColor(sf::Color::Yellow);
-	setCanFall(true);
+	setColor(&COLOR_LIST);
 }
 
 void Sand::CalculateNewPosition(int& x, int& y)

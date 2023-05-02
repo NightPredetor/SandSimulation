@@ -2,8 +2,7 @@
 
 Water::Water(const int x, const int y, const CellManager* cellManager) : Cell(x, y, cellManager)
 {
-	setColor(sf::Color::Blue);
-	setCanFall(true);
+	setColor(&COLOR_LIST);
 }
 
 void Water::CalculateNewPosition(int& x, int& y)

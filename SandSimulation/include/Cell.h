@@ -20,12 +20,11 @@ public:
 	int getYPos() const;
 	sf::Color getColor() const;
 
-	// Setters.
-	void setCanFall(const bool value);
-
 protected:
-	void SetPosition(const int x, const int y);
 	void setColor(sf::Color newColor);
+	void setColor(const std::vector<sf::Color>* colorList);
+
+	void SetPosition(const int x, const int y);
 	bool IsCellEmpty(const int x, const int y) const;
 
 	int GetMultiplierRNG();
@@ -33,12 +32,11 @@ protected:
 private:
 	int xPos;
 	int yPos;
-	bool canFall = true; // If a cell can fall down anymore.
-	sf::Color color;
+	sf::Color color = sf::Color::White;
 
 	std::default_random_engine generator;
 	std::uniform_int_distribution<int> distribution = std::uniform_int_distribution<int>(0, 1);
-
+	std::uniform_int_distribution<int> distributionRandom = std::uniform_int_distribution<int>(0, 4);
 
 	const class CellManager* cellManager;
 };

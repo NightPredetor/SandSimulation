@@ -4,7 +4,7 @@
 // ##### Public #####
 Cell::Cell(const int x, const int y, const CellManager* cellManager) : xPos(x), yPos(y), cellManager(cellManager)
 {
-	setColor(sf::Color::White);
+
 }
 
 void Cell::CalculateNewPosition(int& x, int& y)
@@ -20,9 +20,6 @@ int Cell::getYPos() const { return yPos; }
 
 sf::Color Cell::getColor() const { return color; }
 
-// ----- Setters -----
-void Cell::setCanFall(const bool value) { canFall = value; }
-
 void Cell::SetPosition(const int x, const int y)
 {
 	xPos = x;
@@ -30,6 +27,20 @@ void Cell::SetPosition(const int x, const int y)
 }
 
 void Cell::setColor(sf::Color newColor) { color = newColor; }
+
+void Cell::setColor(const std::vector<sf::Color>* colorList) 
+{
+	if (colorList == nullptr || colorList->empty()) return;
+
+	// Get RNG.
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> dis(0, colorList->size()-1);
+
+	// Set color.
+	sf::Color newColor = (*colorList)[dis(gen)];
+	setColor(newColor);
+}
 
 // ##### Protected #####
 bool Cell::IsCellEmpty(const int x, const int y) const
