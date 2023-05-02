@@ -43,4 +43,5 @@ void CellManager::DrawCell(const int x, const int y)
 	}
 
 	cellList[y][x] = new T(x, y, this);
+	calculatedCellMap[cellList[y][x]] = false;
 }
