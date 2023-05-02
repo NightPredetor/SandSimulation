@@ -104,6 +104,8 @@ bool SimulationManager::getPauseSimulation() const { return pauseSimulation; }
 
 bool SimulationManager::getClearBoard() const { return clearBoard; }
 
+int SimulationManager::getBrushSize() const { return brushSize; }
+
 void SimulationManager::setCurrentCellIndex(const int index) { currentCellIndex = index; }
 
 // ----- Private -----

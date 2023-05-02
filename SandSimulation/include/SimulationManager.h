@@ -34,15 +34,16 @@ public:
 	// Getters.
 	bool getPauseSimulation() const;
 	bool getClearBoard() const;
+	int getBrushSize() const;
 
 	// Setters.
 	void setCurrentCellIndex(const int index);
 
 private:
 	// Set const variables.
-	const int WIDTH = 200;
-	const int LENGTH = 120;
-	const int CELL_SIZE = 8;
+	const int WIDTH = 400;
+	const int LENGTH = 300;
+	const int CELL_SIZE = 3;
 	const int UI_SPACE = 200;
 	const sf::Color BG_COLOR = sf::Color(150, 150, 150);
 
@@ -53,6 +54,7 @@ private:
 	bool clearBoard = false;
 	bool pauseSimulation = false;
 	int currentCellIndex = 1;
+	int brushSize = 5;
 
 	CellManager cellManager = CellManager(WIDTH, LENGTH);
 

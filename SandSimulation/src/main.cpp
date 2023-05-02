@@ -17,7 +17,7 @@ int main()
 	// Create window.
 	sf::RenderWindow window(sf::VideoMode(simulationManager.getTotalWidth() + simulationManager.getUiSpace(),
 							simulationManager.getTotalLength()),
-							"Conway's Game of Life", sf::Style::Close);
+							"Particle Physics Simulation", sf::Style::Close);
 	window.setFramerateLimit(60);
 	window.hasFocus();
 
@@ -88,22 +88,21 @@ int main()
 		}
 
 		// Turn on cells by clicking.
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
+			event.mouseButton.x < simulationManager.getTotalWidth())
 		{
-			const int BRUSH_SIZE = 1;
-			if (event.mouseButton.x < simulationManager.getTotalWidth())
+			const int BRUSH_SIZE = simulationManager.getBrushSize();
+
+			for (int x = -BRUSH_SIZE; x <= BRUSH_SIZE; x++)
 			{
-				for (int x = -BRUSH_SIZE; x <= BRUSH_SIZE; x++)
+				for (int y = -BRUSH_SIZE; y <= BRUSH_SIZE; y++)
 				{
-					for (int y = -BRUSH_SIZE; y <= BRUSH_SIZE; y++)
-					{
-						const auto mousePos = sf::Mouse::getPosition(window);
+					const auto mousePos = sf::Mouse::getPosition(window);
 
-						int xPos = (mousePos.x + x * simulationManager.getCellSize()) / simulationManager.getCellSize();
-						int yPos = (mousePos.y + y * simulationManager.getCellSize()) / simulationManager.getCellSize();
+					int xPos = (mousePos.x + x * simulationManager.getCellSize()) / simulationManager.getCellSize();
+					int yPos = (mousePos.y + y * simulationManager.getCellSize()) / simulationManager.getCellSize();
 
-						simulationManager.DrawCell(xPos, yPos);
-					}
+					simulationManager.DrawCell(xPos, yPos);
 				}
 			}
 		}
