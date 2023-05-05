@@ -107,8 +107,29 @@ int main()
 			}
 		}
 
+		// Clear the window.
+		window.clear(sf::Color::Black);
+
+		// Draw cell BG.
+		window.draw(simulationManager.getCellBg());
+
+		if (simulationManager.getPauseSimulation() == false)
+		{
+			// Cell state logic.
+			simulationManager.UpdateCells();
+		}
+		else
+		{
+			window.draw(buttonManager.getStepBtn());
+			window.draw(buttonManager.getStepLabel());
+		}
+
 		// Cell draw logic.
 		window.draw(simulationManager.GetCellsForDraw());
+
+		// Draw brush.
+		const auto mousePos = sf::Mouse::getPosition(window);
+		window.draw(simulationManager.GetBrushRect(mousePos.x, mousePos.y));
 
 		// Draw UI.
 		window.draw(buttonManager.getPauseBtn());

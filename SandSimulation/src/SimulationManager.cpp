@@ -18,6 +18,8 @@ SimulationManager::SimulationManager()
 
 	// Cell Background rect.
 	cellBackground.setFillColor(BG_COLOR);
+
+	SetupBrushRect();
 }
 
 void SimulationManager::DrawCell(const int x, const int y)
@@ -106,6 +108,15 @@ bool SimulationManager::getClearBoard() const { return clearBoard; }
 
 int SimulationManager::getBrushSize() const { return brushSize; }
 
+sf::RectangleShape SimulationManager::GetBrushRect(const float mouseX, const float mouseY)
+{
+	const int burshRectSize = brushSize * CELL_SIZE;
+
+	brushRect.setPosition(sf::Vector2f(mouseX - burshRectSize, mouseY - burshRectSize));
+
+	return brushRect;
+}
+
 void SimulationManager::setCurrentCellIndex(const int index) { currentCellIndex = index; }
 
 // ----- Private -----
@@ -143,6 +154,16 @@ void SimulationManager::SetupVertexBuffer()
 			i += 4;
 		}
 	}
+}
+
+void SimulationManager::SetupBrushRect()
+{
+	const int burshRectSize = brushSize * CELL_SIZE * 2;
+
+	brushRect = sf::RectangleShape(sf::Vector2f(burshRectSize, burshRectSize));
+	brushRect.setFillColor(sf::Color::Transparent);
+	brushRect.setOutlineColor(sf::Color::Black);
+	brushRect.setOutlineThickness(1);
 }
 
 sf::VertexArray SimulationManager::GetCellsForDraw()

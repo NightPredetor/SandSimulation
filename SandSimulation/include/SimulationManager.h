@@ -35,6 +35,7 @@ public:
 	bool getPauseSimulation() const;
 	bool getClearBoard() const;
 	int getBrushSize() const;
+	sf::RectangleShape GetBrushRect(const float x, const float y);
 
 	// Setters.
 	void setCurrentCellIndex(const int index);
@@ -58,8 +59,10 @@ private:
 
 	CellManager cellManager = CellManager(WIDTH, LENGTH);
 
+	sf::RectangleShape brushRect;
 	sf::VertexArray vertexArray;
 	sf::RectangleShape cellBackground = sf::RectangleShape(sf::Vector2f(WIDTH* CELL_SIZE, LENGTH* CELL_SIZE));
 
 	void SetupVertexBuffer();
+	void SetupBrushRect();
 };
