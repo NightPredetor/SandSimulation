@@ -15,9 +15,9 @@ void CellManager::UpdateCells()
 	int xPos;
 	int yPos;
 
-	for (int y = 0; y < cellList.size(); y++)
+	for (int y = cellList.size()-1; y >= 0; y--)
 	{
-		for (int x = 0; x < cellList[y].size(); x++)
+		for (int x = cellList[y].size()-1; x >= 0; x--)
 		{
 			Cell* cell = cellList[y][x];
 
