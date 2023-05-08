@@ -43,6 +43,11 @@ void Cell::setColor(const std::vector<sf::Color>* colorList)
 }
 
 // ##### Protected #####
+Cell* Cell::GetCell(const int x, const int y) const
+{
+	return cellManager->GetCell(x, y);
+}
+
 bool Cell::IsCellEmpty(const int x, const int y) const
 {
 	return cellManager->IsCellEmpty(x, y);

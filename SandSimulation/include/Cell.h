@@ -25,6 +25,7 @@ protected:
 	void setColor(const std::vector<sf::Color>* colorList);
 
 	void SetPosition(const int x, const int y);
+	Cell* GetCell(const int x, const int y) const;
 	bool IsCellEmpty(const int x, const int y) const;
 
 	int GetMultiplierRNG();

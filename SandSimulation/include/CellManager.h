@@ -18,6 +18,7 @@ public:
 	template<class T>
 	void DrawCell(const int x, const int y);
 	void DrawEmptyCell(const int x, const int y);
+	Cell* GetCell(const int x, const int y) const;
 
 	// Getters.
 	std::vector<std::vector<Cell*>> getCellList() const;
