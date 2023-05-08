@@ -1,13 +1,12 @@
 #pragma once
 
 #include "Cell.h"
+#include "ImmovableSolid.h"
 
-class Stone : public Cell
+class Stone : public ImmovableSolid
 {
 public:
 	explicit Stone(const int x, const int y, const CellManager* cellManager);
-
-	void CalculateNewPosition(int& x, int& y) override;
 
 private:
 	const std::vector<sf::Color> COLOR_LIST =

@@ -1,17 +1,16 @@
 #pragma once
 
 #include "Cell.h"
+#include "MovableSolid.h"
+
 #include <array>
 
-class Sand : public Cell
+class Sand : public MovableSolid
 {
 public:
 	explicit Sand(const int x, const int y, const CellManager* cellManager);
 
-	void CalculateNewPosition(int& x, int& y) override;
-
 private:
-	const std::vector<int> xArray = {0, -1, 1};
 	const std::vector<sf::Color> COLOR_LIST =
 	{
 		sf::Color(235, 200, 95),
