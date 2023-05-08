@@ -145,6 +145,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Liquid.cpp" />
     <ClCompile Include="src\ImmovableSolid.cpp" />
     <ClCompile Include="src\MovableSolid.cpp" />
     <ClCompile Include="src\Sand.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="include\Sand.h" />
     <ClInclude Include="include\Water.h" />
     <ClInclude Include="include\MovableSolid.h" />
+    <ClInclude Include="include\Liquid.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Resources\Font\arial.ttf" />
