@@ -1,6 +1,6 @@
 #include "MovableSolid.h"
 
-MovableSolid::MovableSolid(const int x, const int y, const CellManager* cellManager) : Cell(x, y, cellManager)
+MovableSolid::MovableSolid(const int x, const int y, const CellManager* cellManager) : Solid(x, y, cellManager)
 {
 
 }

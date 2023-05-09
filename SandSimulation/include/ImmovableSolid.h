@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Cell.h"
+#include "Solid.h"
 
-class ImmovableSolid : public Cell
+class ImmovableSolid : public Solid
 {
 public:
 	explicit ImmovableSolid(const int x, const int y, const CellManager* cellManager);

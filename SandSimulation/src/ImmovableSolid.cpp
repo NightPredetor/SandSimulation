@@ -1,6 +1,6 @@
 #include "ImmovableSolid.h"
 
-ImmovableSolid::ImmovableSolid(const int x, const int y, const CellManager* cellManager) : Cell(x, y, cellManager)
+ImmovableSolid::ImmovableSolid(const int x, const int y, const CellManager* cellManager) : Solid(x, y, cellManager)
 {
 
 }
